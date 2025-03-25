@@ -2,7 +2,7 @@ name: Upload Python Package to PyPI
 
 on:
   release:
-    types: [created] # Runs when a new GitHub Release is created
+    types: [published, edited] # Runs when a new GitHub Release is created
 
 jobs:
   deploy:
