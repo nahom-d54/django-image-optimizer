@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="django-image-optimizer",
+    name="django-optimize-image",
     version="0.1.0",
     packages=find_packages(),
     include_package_data=True,
@@ -11,7 +11,7 @@ setup(
     long_description_content_type="text/markdown",
     author="Nahom D",
     author_email="nahom@nahom.eu.org",
-    url="https://github.com/nahom-d54/django-image-optimizer",
+    url="https://github.com/nahom-d54/django-optimize-image",
     classifiers=[
         "Environment :: Web Environment",
         "Framework :: Django",
