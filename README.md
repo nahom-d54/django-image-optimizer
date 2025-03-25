@@ -90,7 +90,7 @@ optimized_image = optimize_image(image_file, width=500, quality=85)
 
 ## **License**
 
-MIT License. Free to use and modify. 🚀
+[MIT License](LICENSE). Free to use and modify. 🚀
 
 ---
 
