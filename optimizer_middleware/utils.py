@@ -12,17 +12,25 @@ def optimize_image(
     """Resize and optimize an image before saving."""
 
     with Image.open(image) as img:
-        if width and height:
-            img = img.resize((width, height), Image.LANCZOS)
-        elif width:
-            height = int((width / img.width) * img.height)
-            img = img.resize((width, height), Image.LANCZOS)
-        elif height:
-            width = int((height / img.height) * img.width)
-            img = img.resize((width, height), Image.LANCZOS)
-
-        if img.mode in ("RGBA", "P"):
+        # Convert mode only if necessary
+        if img.mode not in ("RGB", "L"):
             img = img.convert("RGB")
+
+        # Efficient resizing using thumbnail() (preserves aspect ratio)
+        # prevent scaling up
+        if width and height:
+            if img.width > width and img.height > height:
+                target_scaler = max(width / img.width, height / img.height)
+                target_size = (img.width * target_scaler, img.height * target_scaler)
+                img.thumbnail(target_size, Image.LANCZOS)
+        elif width:
+            if img.width > width:
+                target_size = (width, (width / img.width) * img.height)
+                img.thumbnail(target_size, Image.LANCZOS)
+        elif height:
+            if img.height > height:
+                target_size = ((height / img.height) * img.width, height)
+                img.thumbnail(target_size, Image.LANCZOS)
 
         output = BytesIO()
         img.save(output, format="WEBP", quality=quality, optimize=True)
